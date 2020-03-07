@@ -49,6 +49,7 @@ public class UserController {
         }
 
         String encodedPassword = passwordEncoder.encode(userRecord.getPassword());
+        String encodedClientSecret = passwordEncoder.encode(userRecord.getClientSecret());
 
         userRecord.setPassword(encodedPassword);
 
@@ -57,11 +58,11 @@ public class UserController {
         clientDetails.setAutoapprove("");
         clientDetails.setAdditionalInformation("{}");
         clientDetails.setAuthorizedGrantTypes("authorization_code,password,refresh_token,implicit");
-        clientDetails.setClientId(userRecord.getUsername());
-        clientDetails.setClientSecret(encodedPassword);
+        clientDetails.setClientId(userRecord.getClientId());
+        clientDetails.setClientSecret(encodedClientSecret);
         clientDetails.setRefreshTokenValidity(10000);
-        clientDetails.setResourceIds("Person");
-        clientDetails.setAuthorities("USER, ADMIN");
+        clientDetails.setResourceIds("person-rest-api");
+        clientDetails.setAuthorities("ROLE_user, Role_admin");
         clientDetails.setScope("READ,WRITE");
         clientDetails.setWebServerRedirectUri("http://localhost:8080/");
 

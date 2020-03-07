@@ -47,42 +47,42 @@ public class LoadingController implements CommandLineRunner{
         personService.save(p2);
         LOG.info("Created Second Person");
 
-
-
-
-        LOG.info("Creating Permissions");
-
-        Permission permission1 = new Permission();
-        permission1.setName("create_person");
-
-        Permission permission2 = new Permission();
-        permission2.setName("read_person");
-
-        Permission permission3 = new Permission();
-        permission3.setName("edit_person");
-
-        Permission permission4 = new Permission();
-        permission4.setName("delete_person");
-
-        List<Permission> permissionList = Arrays.asList(permission1, permission2, permission3, permission4);
-        service.saveAllPermission(permissionList);
-
-        LOG.info("Permissions Created Successfully");
-
-
-        LOG.info("Creating User Roles");
-        Role role = new Role();
-        role.setName("ADMIN");
-        role.setPermissions(permissionList);
-
-        Role role2 = new Role();
-        role2.setName("USER");
-        role2.setPermissions(permissionList);
-
-        List<Role> roleList = Arrays.asList(role, role2);
-        service.saveAllRoles(roleList);
-
-        LOG.info("User Roles Created Successfully");
+//
+//
+//
+//        LOG.info("Creating Permissions");
+//
+//        Permission permission1 = new Permission();
+//        permission1.setName("create_person");
+//
+//        Permission permission2 = new Permission();
+//        permission2.setName("read_person");
+//
+//        Permission permission3 = new Permission();
+//        permission3.setName("edit_person");
+//
+//        Permission permission4 = new Permission();
+//        permission4.setName("delete_person");
+//
+//        List<Permission> permissionList = Arrays.asList(permission1, permission2, permission3, permission4);
+//        service.saveAllPermission(permissionList);
+//
+//        LOG.info("Permissions Created Successfully");
+//
+//
+//        LOG.info("Creating User Roles");
+//        Role role = new Role();
+//        role.setName("ADMIN");
+//        role.setPermissions(permissionList);
+//
+//        Role role2 = new Role();
+//        role2.setName("USER");
+//        role2.setPermissions(permissionList);
+//
+//        List<Role> roleList = Arrays.asList(role, role2);
+//        service.saveAllRoles(roleList);
+//
+//        LOG.info("User Roles Created Successfully");
 
 
     }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,7 +17,6 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
@@ -37,26 +37,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     };
 
 
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/console/**").permitAll()
-                .antMatchers(AUTH_WHITELIST).permitAll()
-                .antMatchers("/resources/**").permitAll()
-                .antMatchers("/console/**").permitAll()
-                .antMatchers("/h2/**").permitAll()
-                .antMatchers("/oauth/token").permitAll()
-                .antMatchers("/api/v1/user/**").permitAll()
-                .antMatchers("/user/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic().disable();
-    }
+
 
 
     @Bean
@@ -81,5 +62,20 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
-
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                //HTTP Basic authentication
+                .httpBasic()
+                .and()
+                .authorizeRequests()
+                .antMatchers(AUTH_WHITELIST).permitAll()
+                .antMatchers("/oauth/token").permitAll()
+                .antMatchers("/oauth/token/**").permitAll()
+                .antMatchers( "/api/v1/user/**").permitAll()
+                .antMatchers("/api/v1/user").permitAll()
+                .and()
+                .csrf().disable()
+                .formLogin().disable();
+    }
 }

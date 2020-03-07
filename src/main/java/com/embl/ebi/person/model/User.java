@@ -17,6 +17,13 @@ public class User implements Serializable {
     private String password;
     @Column(name = "email")
     private String email;
+
+    @Column(name="clientId")
+    private String clientId;
+
+    @Column(name="secret")
+    private String clientSecret;
+
     @Column(name = "enabled")
     private boolean enabled;
     @Column(name = "accountNonExpired")
@@ -26,7 +33,7 @@ public class User implements Serializable {
     @Column(name = "accountNonLocked")
     private boolean accountNonLocked;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "role_user", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {
                     @JoinColumn(name = "role_id", referencedColumnName = "id")})
@@ -45,6 +52,8 @@ public class User implements Serializable {
         this.credentialsNonExpired = user.isCredentialsNonExpired();
         this.accountNonLocked = user.isAccountNonLocked();
         this.roles = user.getRoles();
+        this.clientId = user.getClientId();
+        this.clientSecret = user.getClientSecret();
     }
 
     public Long getId() {
@@ -109,6 +118,22 @@ public class User implements Serializable {
 
     public void setAccountNonLocked(boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
     }
 
     public List<Role> getRoles() {

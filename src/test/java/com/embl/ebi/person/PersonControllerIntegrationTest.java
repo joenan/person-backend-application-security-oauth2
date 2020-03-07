@@ -70,7 +70,6 @@ public class PersonControllerIntegrationTest {
     }
 
     @Test
-    @Sql("/test.sql")
     public void testGetPersonById() {
         HttpEntity<Person> entity = new HttpEntity<>(null, headers);
         ResponseEntity<Person> response = restTemplate.exchange("/api/v1/person/1", HttpMethod.GET, entity, Person.class);

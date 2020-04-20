@@ -1,6 +1,6 @@
 package com.embl.ebi.person.controller;
 
-import com.embl.ebi.person.exception.PersonNotFoundException;
+import com.embl.ebi.person.exception.RecordNotFoundException;
 import com.embl.ebi.person.model.Person;
 import com.embl.ebi.person.service.PersonService;
 import io.swagger.annotations.ApiOperation;
@@ -13,23 +13,21 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/")
 public class PersonController {
 
+    private static final Logger log = LoggerFactory.getLogger(PersonController.class);
     @Autowired
     PersonService service;
-
-    private static final Logger log = LoggerFactory.getLogger(PersonController.class);
 
     @ApiOperation(value = "Create Person")
     @PostMapping("/person")
     public ResponseEntity<?> savePerson(@RequestBody @Valid Person request) {
-       log.info("Sending Person {} from Client with Values " + "FirstName: " +request.getFirst_name() + " LastName: "+ request.getLast_name() + " Age: " + request.getAge() + "Hobby" +request.getHobby());
+        log.info("Sending Person {} from Client with Values " + "FirstName: " + request.getFirst_name() + " LastName: " + request.getLast_name() + " Age: " + request.getAge() + "Hobby" + request.getHobby());
 
-        if(request ==null) {
+        if (request == null) {
             log.info("Person {} is empty or Null");
             return ResponseEntity.badRequest().body("Request is empty");
 
@@ -49,27 +47,27 @@ public class PersonController {
     @ApiOperation(value = "Get Person by Id")
     @GetMapping("/person/{id}")
     public ResponseEntity<Person> findPersonsById(@PathVariable("id") Long id) {
-        log.info("Getting Person {} with Id " +id);
+        log.info("Getting Person {} with Id " + id);
         return service.findPersonById(id).map(record -> ResponseEntity.ok().body(record))
-            .orElseThrow(() -> new PersonNotFoundException("User Searched Not Found", id));
+                .orElseThrow(() -> new RecordNotFoundException("User Searched Not Found: " + id));
     }
 
 
     @ApiOperation(value = "Delete Person by Id")
     @DeleteMapping("/person/{id}")
     public ResponseEntity<?> deletePersonCode(@PathVariable("id") Long id) {
-        log.info("Deleting Person {} with Id " +id);
+        log.info("Deleting Person {} with Id " + id);
         return service.findPersonById(id)
                 .map(record -> {
                     service.deletePersonById(id);
                     return ResponseEntity.ok().build();
-                }) .orElseThrow(() -> new PersonNotFoundException("User To Delete Not Found", id));
+                }).orElseThrow(() -> new RecordNotFoundException("User To Delete Not Found: " + id));
     }
 
     @ApiOperation(value = "Edit Person by ID")
     @PutMapping("/person/{id}")
     public ResponseEntity<?> updatePerson(@PathVariable("id") Long id, @RequestBody Person data) {
-        log.info("Updating Person {} with Id " +id);
+        log.info("Updating Person {} with Id " + id);
         return service.findPersonById(id)
                 .map(record -> {
                     record.setAge(data.getAge());

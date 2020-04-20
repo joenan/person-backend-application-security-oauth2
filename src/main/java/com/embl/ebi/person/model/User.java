@@ -18,10 +18,10 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name="clientId")
+    @Column(name = "clientId")
     private String clientId;
 
-    @Column(name="secret")
+    @Column(name = "secret")
     private String clientSecret;
 
     @Column(name = "enabled")
@@ -33,7 +33,7 @@ public class User implements Serializable {
     @Column(name = "accountNonLocked")
     private boolean accountNonLocked;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "role_user", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {
                     @JoinColumn(name = "role_id", referencedColumnName = "id")})

@@ -5,54 +5,42 @@ import com.embl.ebi.person.controller.PersonController;
 import com.embl.ebi.person.model.Person;
 import com.embl.ebi.person.service.PersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.Matchers.hasSize;
 
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(PersonController.class)
 public class PersonControllerTest {
-    @Autowired
-    private MockMvc mockMvc;
-
     @MockBean
     PersonService personService;
-
     @Autowired
     PersonController personController;
-
     ObjectMapper mapper = new ObjectMapper();
-
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
     public void testAddPerson() throws Exception {
@@ -116,14 +104,13 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void findAllUsersById()throws Exception {
+    public void findAllUsersById() throws Exception {
 
         Person p = new Person();
         p.setFirst_name("Stanley");
         p.setLast_name("Philips");
         p.setAge("45");
         p.setHobby(Arrays.asList("Dancing", "Music"));
-
 
 
         Mockito.when(personService.findPersonById(anyLong())).thenReturn(Optional.ofNullable(p));
@@ -146,7 +133,6 @@ public class PersonControllerTest {
         p.setHobby(Arrays.asList("Dancing", "Music"));
 
 
-
         Mockito.when(personService.findPersonById(anyLong())).thenReturn(Optional.ofNullable(p));
 
         mockMvc.perform(delete("/api/v1/person/1"))
@@ -161,7 +147,6 @@ public class PersonControllerTest {
         p.setLast_name("Philips");
         p.setAge("45");
         p.setHobby(Arrays.asList("Dancing", "Music"));
-
 
 
         Mockito.when(personService.findPersonById(anyLong())).thenReturn(Optional.ofNullable(p));

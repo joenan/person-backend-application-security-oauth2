@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="oauth_client_token")
+@Table(name = "oauth_client_token")
 public class OauthClientToken implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

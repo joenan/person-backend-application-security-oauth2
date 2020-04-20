@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="oauth_code")
+@Table(name = "oauth_code")
 public class OauthCode implements Serializable {
 
     @Id

@@ -1,13 +1,13 @@
 package com.embl.ebi.person.model.oauthmodels;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-@Table(name="oauth_approvals")
+@Table(name = "oauth_approvals")
 public class OauthApprovals implements Serializable {
 
     @Id
@@ -28,11 +28,11 @@ public class OauthApprovals implements Serializable {
     private String status;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "expiresAt", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "expiresAt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date expiresAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "lastModifiedAt", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "lastModifiedAt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date lastModifiedAt;
 
     public OauthApprovals() {

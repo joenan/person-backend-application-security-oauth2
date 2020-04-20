@@ -6,7 +6,6 @@ import com.embl.ebi.person.repository.UserDetailRepository;
 import com.embl.ebi.person.service.OauthService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,11 +21,9 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private UserDetailRepository userService;
-
-    @Autowired
     OauthService oauthService;
-
+    @Autowired
+    private UserDetailRepository userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 

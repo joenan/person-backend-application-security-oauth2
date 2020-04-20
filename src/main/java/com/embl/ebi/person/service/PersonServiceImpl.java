@@ -3,7 +3,6 @@ package com.embl.ebi.person.service;
 import com.embl.ebi.person.model.Person;
 import com.embl.ebi.person.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class PersonServiceImpl implements PersonService{
+public class PersonServiceImpl implements PersonService {
 
     @Autowired
     PersonRepository personRepository;
@@ -36,8 +35,6 @@ public class PersonServiceImpl implements PersonService{
     public void deletePersonById(Long id) {
         personRepository.deleteById(id);
     }
-
-
 
 
 }

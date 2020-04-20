@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="oauth_refresh_token")
+@Table(name = "oauth_refresh_token")
 public class OauthRefreshToken implements Serializable {
 
     @Id
@@ -15,7 +15,7 @@ public class OauthRefreshToken implements Serializable {
     @Column(name = "token_id")
     private String tokenId;
 
-    @Column(name = "token",columnDefinition = "TEXT")
+    @Column(name = "token", columnDefinition = "TEXT")
     private String token;
 
     @Column(name = "authentication", columnDefinition = "TEXT")

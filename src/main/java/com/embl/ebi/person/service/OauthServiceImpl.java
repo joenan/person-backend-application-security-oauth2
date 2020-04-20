@@ -12,7 +12,6 @@ import com.embl.ebi.person.repository.oauthrepository.OauthClientDetailsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +35,7 @@ public class OauthServiceImpl implements OauthService {
 
     @Override
     public User saveUser(User user) {
-       return userDetailRepository.save(user);
+        return userDetailRepository.save(user);
     }
 
     @Override

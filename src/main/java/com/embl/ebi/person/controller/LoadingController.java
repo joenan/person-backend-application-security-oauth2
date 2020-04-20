@@ -2,32 +2,23 @@ package com.embl.ebi.person.controller;
 
 
 import com.embl.ebi.person.PersonApplication;
-import com.embl.ebi.person.model.Permission;
 import com.embl.ebi.person.model.Person;
-import com.embl.ebi.person.model.Role;
 import com.embl.ebi.person.service.OauthService;
 import com.embl.ebi.person.service.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
-import java.util.List;
-
 @RestController
-public class LoadingController implements CommandLineRunner{
-
-    @Autowired
-    OauthService service;
-
-    @Autowired
-    PersonService personService;
+public class LoadingController implements CommandLineRunner {
 
     private static Logger LOG = LoggerFactory.getLogger(PersonApplication.class);
+    @Autowired
+    OauthService service;
+    @Autowired
+    PersonService personService;
 
     public void executeScripts() {
 
